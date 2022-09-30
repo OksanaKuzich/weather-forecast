@@ -12,9 +12,5 @@ async function onSubmitForm(e) {
   const fetchResult = await fetchWeather.fetchCity(cityName);
   const fetchResultWeather = await fetchWeather.fetchWeather(fetchResult[0]);
 
-  cardsEl.innerHTML = markUp.markUpCard(fetchResult[0]);
-  cardsEl.insertAdjacentHTML(
-    'beforeend',
-    markUp.markUpWeather(fetchResultWeather)
-  );
+  cardsEl.innerHTML = markUp.markUpCard(fetchResultWeather);
 }

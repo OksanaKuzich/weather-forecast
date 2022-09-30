@@ -4,18 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Page title</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="./sass/index.scss" />
     <script type="module" src="./index.js"></script>
   </head>
   <body>
-    <form class="form">
+    <form class="form form-inline">
       <input
-        class="input"
+        class="input form-control"
         type="text"
         name="city"
         placeholder="Enter city..."
       />
-      <button class="find-button" type="submit">Find</button>
+      <button class="btn btn-default" type="submit">Find</button>
     </form>
     <div class="cards"></div>
   </body>

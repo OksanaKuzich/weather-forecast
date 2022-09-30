@@ -1,7 +1,33 @@
+import { format } from 'date-fns';
+
 export function markUpCard(city) {
   return `<div class="container">
-          <h2>${city.name}, ${city.state}, ${city.country}</h2>
-        </div>`;
+          <h2 class="city-name">Weather in ${city.name}, ${
+    city.sys.country
+  }</h2>
+          <p class="current-date">${format(new Date(), 'd MMMM, eeee')}</p>
+          <div class="wrapper">
+          <div class="weather">
+          <img class="img" src='http://openweathermap.org/img/wn/${
+            city.weather[0].icon
+          }@2x.png'>
+          <p class="temperature">${(city.main.temp - 273.15).toFixed(
+            0
+          )}<span>&#8451;</span></p>
+          <p class="type-weather">${city.weather[0].description}</p>
+          </div>
+          <div class="info">
+          <p class="">Feels like: ${(city.main.feels_like - 273.15).toFixed(
+            0
+          )}<span>&#8451;</span></p>
+          <p class="">Pressure: ${city.main.grnd_level * 0.75}mm</p>
+          <p class="">Humidity: ${city.main.humidity}%</p>
+          <p class="">Wind: ${city.wind.speed}m/s</p>
+          <p class="">Sunrise: ${convertedDate(city.sys.sunrise * 1000)}AM</p>
+          <p class="">Sunset: ${convertedDate(city.sys.sunset * 1000)}PM</p>
+          </div>
+          </div>
+          </div>`;
 }
 
 export function markUpList(item) {
@@ -12,24 +38,10 @@ export function markUpList(item) {
     .join('');
 }
 
-export function markUpWeather(weather) {
-  return `<div class="container-wather">
-          <img src='http://openweathermap.org/img/wn/${
-            weather.weather[0].icon
-          }@2x.png'>
-          <p>Weather: ${weather.weather[0].description}</p>
-          <p>Temperature: ${(weather.main.temp - 273.15).toFixed(
-            2
-          )}<span>&#8451;</span></p>
-          <p>Pressure: ${weather.main.grnd_level * 0.75}mm</p>
-          <p>Humidity: ${weather.main.humidity}%</p>
-          <p>Wind: ${weather.wind.speed}m/s</p>
-          <p>Sunrise: ${convertedDate(weather.sys.sunrise * 1000)}</p>
-          <p>Sunset: ${convertedDate(weather.sys.sunset * 1000)}</p>
-        </div>`;
-}
-
 function convertedDate(ms) {
   const date = new Date(ms);
-  return date.toLocaleTimeString();
+  return date.toLocaleTimeString(navigator.language, {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
 }
