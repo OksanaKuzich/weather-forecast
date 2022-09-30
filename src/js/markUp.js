@@ -30,10 +30,10 @@ export function markUpCard(city) {
           </div>`;
 }
 
-export function markUpList(item) {
-  return item
-    .map(({ flags, name }) => {
-      return `<li class='list'><img class='flag' src="${flags.svg}" alt="${name.official}" width=70px><p>${name.official}</p></li>`;
+export function markUpList(items) {
+  return items
+    .map(({ name, state, country, lat, lon }) => {
+      return `<li class='list'><button class="btn-list" type="button" data-lat="${lat}" data-lon="${lon}">${name}, ${state}, ${country}</button></li>`;
     })
     .join('');
 }
