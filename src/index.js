@@ -29,6 +29,7 @@ async function onSubmitForm(e) {
 
   if (fetchResult.length === 0) {
     Notify.warning('Sorry, your city was not found!');
+    findBtnEl.disabled = true;
     return;
   }
 
@@ -60,6 +61,7 @@ async function onInputChange(e) {
 
   if (fetchResult.length === 0) {
     Notify.warning('Sorry, your city was not found!');
+    findBtnEl.disabled = true;
     return;
   }
 
@@ -82,14 +84,12 @@ async function handleButtonClick(e) {
 
   findBtnEl.disabled = true;
 
-  // if (
-  //   cityLon !== fetchResultWeather.coord.lon ||
-  //   cityLat !== fetchResultWeather.coord.lat
-  // ) {
-  //   Notify.info(
-  //     'We did not find your city. We offer a weather forecast for the nearest available city.'
-  //   );
-  // }
+  if (
+    cityLon !== fetchResultWeather.coord.lon ||
+    cityLat !== fetchResultWeather.coord.lat
+  ) {
+    Notify.success('Your city has been found. Or the one closest to it.');
+  }
 
   cardsEl.innerHTML = markUp.markUpCard(fetchResultWeather);
 }
