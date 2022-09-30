@@ -1,4 +1,4 @@
-import * as fetchWeather from './js/fetchWeather';
+import * as fetchRequest from './js/fetchRequest';
 import * as markUp from './js/markUp';
 import debounce from 'lodash.debounce';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -18,17 +18,26 @@ async function onSubmitForm(e) {
   listEl.classList.add('visually-hidden');
 
   const cityName = e.target.elements.city.value.trim();
+
   if (!cityName) {
     Notify.info('Please enter your city!');
     return;
   }
-  const fetchResult = await fetchWeather.fetchCity(cityName);
+
+  const fetchResult = await fetchRequest.fetchCity(cityName);
+  console.log(fetchResult);
+
   if (fetchResult.length === 0) {
     Notify.warning('Sorry, your city was not found!');
     return;
   }
-  const fetchResultWeather = await fetchWeather.fetchWeather(fetchResult[0]);
 
+  const fetchResultWeather = await fetchRequest.fetchWeather(
+    fetchResult[0].lon,
+    fetchResult[0].lat
+  );
+  console.log(fetchResultWeather);
+  listEl.classList.add('visually-hidden');
   cardsEl.innerHTML = markUp.markUpCard(fetchResultWeather);
 }
 
@@ -38,7 +47,7 @@ async function onInputChange(e) {
     Notify.info('Please enter your city!');
     return;
   }
-  const fetchResult = await fetchWeather.fetchCity(cityName);
+  const fetchResult = await fetchRequest.fetchCity(cityName);
   if (fetchResult.length === 0) {
     Notify.warning('Sorry, your city was not found!');
     return;
@@ -53,11 +62,16 @@ async function handleButtonClick(e) {
     return;
   }
   listEl.classList.add('visually-hidden');
-  console.log('dataset', e.target.dataset);
   const cityLon = e.target.dataset.lon;
   const cityLat = e.target.dataset.lat;
-  const fetchResultWeather = await fetchWeather.fetchWeather(cityLon, cityLat);
-  console.log(fetchResultWeather);
-
+  const fetchResultWeather = await fetchRequest.fetchWeather(cityLon, cityLat);
+  if (
+    cityLon !== fetchResultWeather.coord.lon ||
+    cityLat !== fetchResultWeather.coord.lat
+  ) {
+    Notify.warning(
+      'We did not find your city. We offer a weather forecast for the nearest available city.'
+    );
+  }
   cardsEl.innerHTML = markUp.markUpCard(fetchResultWeather);
 }

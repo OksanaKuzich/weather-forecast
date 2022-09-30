@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 
 export function markUpCard(city) {
+  console.log(city);
   return `<div class="container">
           <h2 class="city-name">Weather in ${city.name}, ${
     city.sys.country
