@@ -9,7 +9,7 @@ export async function fetchCity(cityName) {
 
   try {
     const response = await fetch(
-      `http://api.openweathermap.org/geo/1.0/direct?${searchParams}`
+      `https://api.openweathermap.org/geo/1.0/direct?${searchParams}`
     );
     currentCity = await response.json();
     return currentCity;
