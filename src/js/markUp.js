@@ -36,6 +36,9 @@ export function markUpCard(city) {
 export function markUpList(items) {
   return items
     .map(({ name, state, country, lat, lon }) => {
+      if (state === undefined) {
+        return `<li class='list'><button class="btn-list" type="button" data-lat="${lat}" data-lon="${lon}">${name}, ${country}</button></li>`;
+      }
       return `<li class='list'><button class="btn-list" type="button" data-lat="${lat}" data-lon="${lon}">${name}, ${state}, ${country}</button></li>`;
     })
     .join('');
