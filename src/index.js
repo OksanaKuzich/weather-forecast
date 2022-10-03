@@ -193,7 +193,15 @@ async function onClickMore(e) {
         },
       ],
     },
-    options: {},
+    options: {
+      scales: {
+        y: {
+          ticks: {
+            stepSize: 1,
+          },
+        },
+      },
+    },
   });
 }
 
