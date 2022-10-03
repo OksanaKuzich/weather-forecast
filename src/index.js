@@ -110,6 +110,7 @@ async function onInputChange(e) {
     listEl.classList.add('visually-hidden');
     listEl.innerHTML = '';
     cardsEl.innerHTML = '';
+    diagramEl.style.display = 'none';
     return;
   } else if (!cityName) {
     Notify.info('Please enter your city!');
@@ -164,7 +165,6 @@ async function onClickMore(e) {
 
   btnMoreEl.style.display = 'none';
   diagramEl.style.display = 'block';
-  console.log(fetchResultForecast.list);
 
   let ctx = document.getElementById('myChart').getContext('2d');
   let chart = new Chart(ctx, {
