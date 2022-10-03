@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 
 export function markUpCard(city) {
-  return `<div class="container">
+  return `<div class="container-weather">
           <h2 class="city-name">Weather in ${city.name}, ${
     city.sys.country
   }</h2>
@@ -25,6 +25,9 @@ export function markUpCard(city) {
           <p class="">Wind: ${city.wind.speed}m/s</p>
           <p class="">Sunrise: ${convertedDate(city.sys.sunrise * 1000)}AM</p>
           <p class="">Sunset: ${convertedDate(city.sys.sunset * 1000)}PM</p>
+          <button class="btn-more" type="button" data-lat="${
+            city.coord.lat
+          }" data-lon="${city.coord.lon}">--> See more</button>
           </div>
           </div>
           </div>`;

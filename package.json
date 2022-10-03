@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "bootstrap": "^3.4.1",
+    "chart.js": "^3.9.1",
     "date-fns": "^2.29.3",
     "lodash.debounce": "^4.0.8",
     "modern-normalize": "^1.1.0",
